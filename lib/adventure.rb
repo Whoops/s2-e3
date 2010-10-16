@@ -20,7 +20,11 @@ module Adventure
   def print_state
     puts World.room.description
     World.room.doors.keys.each do |direction|
-      puts "You see a door to the #{direction}"
+      str = "You see a door to the #{direction}"      
+      if Hash===World.room.doors[direction] && World.room.doors[direction]['locked'] then
+        str += " (locked)"
+      end
+      puts str
     end
   end
   

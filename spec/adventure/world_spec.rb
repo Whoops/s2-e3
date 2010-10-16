@@ -44,20 +44,28 @@ describe World do
         'name' => 'entryway',
         'description' => 'The entryway',
         'doors' => {
-        'west' => 'living_room',
-        'south' => 'driveway'
-      }
+          'west' => 'living_room',
+          'south' => 'driveway',
+          'east' => {
+            'to' => 'locked room',
+            'locked' => true
+          }
+        }
       },
         {
         'name' => 'living_room',
         'description' => 'The living room',
         'doors' => { 'east' => 'entryway' }
-      }
+        },
+        {
+          'name' => 'locked room',
+          'description' => 'A locked room'
+        }
       ]}
+      World.load(@rooms_doors)
     end
     
     it "should allow movement between rooms do" do
-      World.load(@rooms_doors)
       World.room.name.should == 'driveway'
       World.go('north').should be_true
       World.room.name.should == 'entryway'
@@ -67,11 +75,17 @@ describe World do
       World.room.name.should == 'entryway'
     end
     
-    it "should not allow movement through nonexistant doors" do
-      World.load(@rooms_doors)
+    it "should not allow movement through nonexistant doors" do      
       World.room.name.should == 'driveway'
       World.go('south').should be_false
       World.room.name.should == 'driveway'
+    end
+    
+    it "should not allow one to pass through locked doors" do
+      World.go('north') #move to the hallway
+      World.room.name.should == 'entryway'
+      World.go('east').should be_false
+      World.room.name.should == 'entryway'
     end
 
   end

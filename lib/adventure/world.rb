@@ -14,8 +14,14 @@ module Adventure
       end
     end
     
-    def go(direction)
-      @room=rooms[@room.doors[direction]] if @room.doors[direction]
+    def go(direction)      
+      if Hash === @room.doors[direction] then
+        unless @room.doors[direction]['locked']
+          @room=rooms[@room.doors[direction]['to']]
+        end
+      else
+        @room=rooms[@room.doors[direction]] if @room.doors[direction]
+      end
     end
     
     class Room
