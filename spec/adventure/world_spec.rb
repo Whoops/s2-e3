@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 require File.join(libs,'adventure','world')
 include Adventure
-include World
 describe World do
 
   describe "loading" do
@@ -86,22 +85,6 @@ describe World do
       World.room.name.should == 'entryway'
       World.go('east').should be_false
       World.room.name.should == 'entryway'
-    end
-
-  end
-
-
-  describe Room do
-    it "take a hash of attributes" do
-      room = Room.new(:name=>'foo', :description=>'foobar')
-      room.name.should == 'foo'
-      room.description.should == 'foobar'
-    end
-
-    it "should raise a NoMethodError when an attribute does not exist" do
-      lambda do
-        room=Room.new(:fuzz=>'jackrabbit')
-      end.should raise_error NoMethodError
     end
 
   end

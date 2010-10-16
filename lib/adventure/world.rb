@@ -1,3 +1,4 @@
+require 'adventure/room'
 module Adventure
   module World
     extend self
@@ -15,21 +16,8 @@ module Adventure
     end
     
     def go(direction)      
-      if Hash === @room.doors[direction] then
-        unless @room.doors[direction]['locked']
-          @room=rooms[@room.doors[direction]['to']]
-        end
-      else
-        @room=rooms[@room.doors[direction]] if @room.doors[direction]
-      end
-    end
-    
-    class Room
-      attr_accessor :name, :description, :doors
-      def initialize(attrs)
-        attrs.each do |attr, key|
-          send("#{attr}=",key)
-        end
+      if(@room.doors[direction] && !@room.doors[direction].locked)
+        @room = @room.doors[direction].to
       end
     end
     
