@@ -14,8 +14,12 @@ module Adventure
       end
     end
     
+    def go(direction)
+      @room=rooms[@room.doors[direction]] if @room.doors[direction]
+    end
+    
     class Room
-      attr_accessor :name, :description
+      attr_accessor :name, :description, :doors
       def initialize(attrs)
         attrs.each do |attr, key|
           send("#{attr}=",key)

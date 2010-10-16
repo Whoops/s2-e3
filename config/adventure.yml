@@ -1,0 +1,15 @@
+rooms:
+  - name: driveway
+    description: You are in a very expansive driveway.
+    initial: true
+    doors:
+      north: entryway
+  - name: entryway
+    description: You have entered a huge hallway.  There is a large portrait on the wall, presumably someone who lived in the manor a long, long time ago.
+    doors:
+      south: driveway
+      west: living room
+  - name: living room
+    description: You are now in a musky old living room.  There is a massive and very plush couch facing an old hearth.  There is a layer of dust almost an inch thick carpeting everything in the room.
+    doors:
+      east: entryway
