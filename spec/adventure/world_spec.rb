@@ -8,7 +8,8 @@ describe World do
       @rooms = {'rooms' => [
         { 'name' => 'atrium', 'description' => 'A vast atrium' },
         { 'name' => 'hallway', 'description' => 'A grand entranceway'}
-      ]};
+      ],
+      'items' => []};
     end
 
     it "should load a hash of rooms" do
@@ -27,6 +28,60 @@ describe World do
       World.load(config)
       World.room.name.should == 'driveway'
     end
+  end
+  
+  describe 'items' do
+    before(:each) do
+      @config = {'rooms' => [
+        { 'name' => 'atrium', 'initial'=>true, 'doors'=>{ 'north' => { 'to' => 'foyer', 'locked' => true } } },
+        { 'name' => 'foyer' }
+        ],
+      'items' => [
+        { 'name' => 'key', 'room'=>'atrium', 'unlocks' => { 'room' => 'atrium', 'door' => 'north' } }
+        ]}
+      World.load(@config)
+    end
+    
+    it "should put items in the proper room" do
+      World.rooms['atrium'].items.length.should == 1
+      World.rooms['atrium'].items['key'].should_not be_nil
+      World.rooms['foyer'].items.length.should == 0
+    end
+    
+    it "should allow items to be picked up" do
+      World.room.items['key'].should_not be_nil
+      World.pick('key').should be_true
+      World.inventory['key'].should_not be_nil
+      World.room.items['key'].should be_nil
+    end
+    
+    it "should not allow items to be picked up that are not in the same room" do
+      World.instance_variable_set('@room', World.rooms['foyer'])
+      World.pick('key').should be_false
+    end
+    
+    it "should allow items to be dropped" do
+      World.pick('key')
+      World.instance_variable_set('@room', World.rooms['foyer'])
+      World.drop('key')
+      World.inventory.should be_empty
+      World.room.items['key'].should_not be_nil
+    end
+    
+    it "should allow items to be used" do
+      World.room.doors['north'].should be_locked
+      World.pick('key')
+      World.use('key').should be_true
+      World.room.doors['north'].should_not be_locked
+    end
+    
+    it "should not allow items to be used in the wrong room" do
+      World.pick('key')
+      World.instance_variable_set('@room', World.rooms['foyer'])
+      World.use('key').should be_false
+      World.rooms['atrium'].doors['north'].should be_locked
+    end
+    
   end
 
 
@@ -60,7 +115,8 @@ describe World do
           'name' => 'locked room',
           'description' => 'A locked room'
         }
-      ]}
+      ],
+      'items' => []}
       World.load(@rooms_doors)
     end
     

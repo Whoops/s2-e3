@@ -18,6 +18,10 @@ module Adventure
         @to=value
       end
       
+      def locked?
+        @locked
+      end
+      
     end
   end
 end

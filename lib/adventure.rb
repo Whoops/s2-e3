@@ -21,7 +21,7 @@ module Adventure
     puts World.room.description
     World.room.doors.keys.each do |direction|
       str = "You see a door to the #{direction}"      
-      str += " (locked)" if World.room.doors[direction].locked
+      str += " (locked)" if World.room.doors[direction].locked?
       puts str
     end
   end

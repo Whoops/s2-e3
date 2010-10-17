@@ -5,11 +5,14 @@ module Adventure
 
     class Room
       attr_accessor :name, :description
+      attr_accessor :items
 
       def initialize(attrs)
         attrs.each do |attr, key|
           send("#{attr}=",key)
         end
+        @items ||= {}
+        @doors ||= {}
       end
       
       def doors
