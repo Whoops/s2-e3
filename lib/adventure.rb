@@ -27,12 +27,25 @@ module Adventure
     World.room.items.each do |key, value|
       puts "#{value.description} (#{key})"
     end
+    print_doors
+  end
+  
+  def print_doors
     World.room.doors.keys.each do |direction|
-      str = "You see a door to the #{direction}"      
-      str += " (impassible)" if World.room.doors[direction].locked?
+      room=World.room.doors[direction]
+      
+      str="#{room.description || 'you see a room to the'} (#{direction})"
+      
+      str += case room.locked
+      when String then " #{room.locked}"
+      when true then " (locked)"
+      else ""
+      end
+      
       puts str
     end
   end
+    
   
   def do_turn()
     print_state

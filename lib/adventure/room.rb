@@ -24,7 +24,7 @@ module Adventure
         
         hash.each do |direction, door|
           @doors[direction] = if Hash===door then
-            Door.new(door['to'],door['locked'])
+            Door.new(door['to'],door['description'],door['locked'])
           else
             Door.new(door)
           end

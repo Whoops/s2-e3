@@ -3,10 +3,11 @@ module Adventure
     
     
     class Door
-      attr_accessor :locked
+      attr_accessor :locked, :description
       
-      def initialize(dest, lock=false)
+      def initialize(dest, desc=nil, lock=false)
         @to=dest
+        @description=desc
         @locked=lock
       end
       

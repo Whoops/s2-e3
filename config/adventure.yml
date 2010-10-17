@@ -11,6 +11,7 @@ rooms:
       west: living room
       east:
         to: locked room
+        description: To the east is an old but sturdy looking door
         locked: true
   - name: living room
     description: You are now in a musky old living room.  There is a massive and very plush couch facing an old hearth.  There is a layer of dust almost an inch thick carpeting everything in the room.
