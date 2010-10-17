@@ -28,7 +28,7 @@ module Adventure
     end
     World.room.doors.keys.each do |direction|
       str = "You see a door to the #{direction}"      
-      str += " (locked)" if World.room.doors[direction].locked?
+      str += " (impassible)" if World.room.doors[direction].locked?
       puts str
     end
   end
