@@ -3,9 +3,7 @@ rooms:
     description: You are in a very expansive driveway.
     initial: true
     doors:
-      north:
-        to: entryway
-        locked: true
+      north: entryway
   - name: entryway
     description: You have entered a huge hallway.  There is a large portrait on the wall, presumably someone who lived in the manor a long, long time ago.
     doors:
@@ -19,13 +17,14 @@ rooms:
     doors:
       east: entryway
   - name: locked room
-    description: A mysterious and currently locked off room. There must be a way to get inside, there must!
+    description: A mysterious and previously locked room.  Something smells funny.
     doors:
       west: entryway
 items:
   - name: key
     description: You see a key sitting on the doormat
+    used: You unlock the east door
     room: driveway
     unlocks:
-      room: driveway
-      door: north
+      room: entryway
+      door: east

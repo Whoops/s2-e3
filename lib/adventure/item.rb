@@ -3,7 +3,7 @@ module Adventure
     
     class Item
       
-      attr_accessor :name, :description, :look, :unlocks
+      attr_accessor :name, :description, :unlocks, :used
       def initialize(attrs)
         attrs.each do |attr, key|
           send("#{attr}=",key)

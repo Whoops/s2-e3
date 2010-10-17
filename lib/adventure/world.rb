@@ -50,7 +50,7 @@ module Adventure
       return nil unless item
       if(@room.name==item.unlocks['room'])
         @room.doors[item.unlocks['door']].locked=false
-        true
+        item
       end
     end
     

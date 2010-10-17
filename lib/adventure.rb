@@ -19,6 +19,9 @@ module Adventure
   
   def print_state
     puts World.room.description
+    World.room.items.each do |key, value|
+      puts "#{value.description} (#{key})"
+    end
     World.room.doors.keys.each do |direction|
       str = "You see a door to the #{direction}"      
       str += " (locked)" if World.room.doors[direction].locked?
@@ -35,6 +38,24 @@ module Adventure
         "You go #{command[1]}"
       else
         "You can't go that way"
+      end
+    when 'pick' then
+      if World.pick(command[2])
+        "You pick up #{command[2]}"
+      else
+        "You can't take that!"
+      end
+    when 'use' then
+      if item=World.use(command[1])
+        item.used
+      else
+        "You can't use that here!"
+      end
+    when 'drop' then
+      if World.drop(command[1])
+        "You drop #{command[1]}"
+      else
+        "You don't have #{command[1]}!"
       end
     when 'exit' then exit
     when 'help' then print_commands
