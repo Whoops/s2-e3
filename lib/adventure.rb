@@ -14,6 +14,10 @@ module Adventure
     puts "Command list:"
     puts "\t help -Show this screen"
     puts "\t go <direction>  -Goes in the direction specified"
+    puts "\t pick up <item> -Picks up the item denoted by item"
+    puts "\t\t\t Note: look for item names inside (parens)"
+    puts "\t drop <item> -Drops the item. It can be picked up later"
+    puts "\t use <item> -Uses the item, you must be in the right room"
     puts "\t exit  -Exit the program"
   end
   
