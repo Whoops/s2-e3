@@ -48,7 +48,7 @@ module Adventure
     def use(i)
       item=@inventory[i]
       return nil unless item
-      if(@room.name==item.unlocks['room'])
+      if(item.unlocks && @room.name==item.unlocks['room'])
         @room.doors[item.unlocks['door']].locked=false
         item
       end

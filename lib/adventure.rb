@@ -21,12 +21,13 @@ module Adventure
     puts "\t exit  -Exit the program"
   end
   
-  def print_state
-    puts "\n\n"
+  def print_state    
     puts World.room.description
+    puts "" if World.room.items.length > 0
     World.room.items.each do |key, value|
       puts "#{value.description} (#{key})"
     end
+    puts "\n"
     print_doors
   end
   
@@ -34,7 +35,7 @@ module Adventure
     World.room.doors.keys.each do |direction|
       room=World.room.doors[direction]
       
-      str="#{room.description || 'you see a room to the'} (#{direction})"
+      str="#{room.description || 'You see a room to the'} (#{direction})"
       
       str += case room.locked
       when String then " #{room.locked}"
@@ -50,6 +51,9 @@ module Adventure
   def do_turn()
     print_state
     command = get_command
+    
+    puts "\n\n"
+    
     puts case command[0]
     when 'go' then
       if World.go(command[1])
@@ -79,6 +83,7 @@ module Adventure
     when 'help' then print_commands
     else 'I have no idea what your talking about'
     end
+    
   end
   
   def get_command()

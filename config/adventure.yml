@@ -1,31 +1,75 @@
 rooms:
-  - name: driveway
-    description: You are in a very expansive driveway.
+  - name: start
+    description: Standing at the base of the driveway leading up to the massive mansion, you suddenly realize your knees are shaking.  "Just a little longer," you remind yourself, "all I have to do is get into his office and this will all be over".  You look up at the looming structure ahead of you, take a deep breath, and begin walking.
     initial: true
     doors:
-      north: entryway
-  - name: entryway
-    description: You have entered a huge hallway.  There is a large portrait on the wall, presumably someone who lived in the manor a long, long time ago.
+      north:
+        description: The driveway leads north up to the mansion
+        to: lower driveway
+  - name: lower driveway
+    description: Only halfway up the long driveway you have to stop to catch your breath.  "If I live through tonight, " you think "I'm finally going to start jogging"
     doors:
-      south: driveway
-      west: living room
-      east:
-        to: locked room
-        description: To the east is an old but sturdy looking door
+      south:
+        description: The driveway winds along behind you, eventually leading to the road
+        to: start
+      north: 
+        description: Ahead, the driveway continues meandering toward the mansion.
+        to: upper driveway
+  - name: upper driveway
+    description: Huffing and puffing you finally make it up to the house.  Up close it is even larger and more intimidating than it appeared from the road.  Once more you continue turning back, but unfortunately that has long since ceased to be an option. Steeling yourself, you continue on.
+    doors:
+      north:
+        description: Just ahead of you is the front door
+        to: entryway
         locked: true
-  - name: living room
-    description: You are now in a musky old living room.  There is a massive and very plush couch facing an old hearth.  There is a layer of dust almost an inch thick carpeting everything in the room.
+      south:
+        description: Just the thought of that driveway makes your legs ache
+        to: lower driveway
+      west:
+        description: To the west you can see what appears to be a garden
+        to: garden
+      east:
+        description: There appears to be a rather large fountain to the east
+        to: fountain
+  - name: garden
+    description: You find yourself in what used to be a garden, but has since been allowed to become horribly overgrown.  The benches, and even some of the paths have become useless due to the excessive greenery.
     doors:
-      east: entryway
-  - name: locked room
-    description: A mysterious and previously locked room.  Something smells funny.
+      east:
+        description: To the east is the mansion's main entrance
+        to: upper driveway
+  - name: fountain
+    description: You imagine that this once was a very peaceful spot.  Over time however, the weathering of stone and the tangled overgrowth has given the place a decidedly gloomy appearance.  In truth, you can't wait to leave.
     doors:
-      west: entryway
+      west:
+        description: Off to the west, you can see the main entrance
+        to: upper driveway
+      under:
+        description: You see a strangle glinting under a particularly thick mess of brambles.
+        to: brambles
+        locked: They are much to overgrown to get through.
+  - name: brambles
+    description: Just for a minute, you curl up here, hidden under the brambles, and think wildly that maybe you can just say here, that maybe it's safe here.  But no, that won't help.  There is no help.
+    doors:
+      under:
+        description: If you slide under the brambles, you can get back to the fountain.
+        to: fountain
+  - name: entryway
+    description: As you enter the once lavish but now crumbling entryway, you hear the front door slam.  Heart thumping, you scrabble for the handle, but encounter only smooth wall.  Slowly regaining your senses, you close your eyes trying to calm the pounding behind your temples.  It looks like theres no turning back, but then there never was.
 items:
-  - name: key
-    description: You see a key sitting on the doormat
-    used: You unlock the east door
-    room: driveway
+  - name: pebble
+    description: There is a shiny pebble sitting beside the driveway.  As hard as you might try, your eyes are continually drawn to it.  Birdbrain.
+    room: lower driveway
+  - name: shears
+    description: Tangled in some weeds you see a servicable pair of pruning shears.  You hope that spot is rust, you really do.
+    room: garden
+    used: Sweating and swearing, you manage to cut a useable hole through the brambles
     unlocks:
-      room: entryway
-      door: east
+      room: fountain
+      door: under
+  - name: key
+    description: There appears to be a key laying here
+    room: brambles
+    used: You unlock the front door to the mansion
+    unlocks:
+      room: upper driveway
+      door: north
