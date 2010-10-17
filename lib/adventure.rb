@@ -22,6 +22,7 @@ module Adventure
   end
   
   def print_state
+    puts "\n\n"
     puts World.room.description
     World.room.items.each do |key, value|
       puts "#{value.description} (#{key})"
