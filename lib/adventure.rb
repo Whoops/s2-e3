@@ -3,11 +3,18 @@ require 'adventure/world.rb'
 module Adventure
   extend self
   def run(config)
+    @done=false
     World.load(config)
     puts "At any time type help for a list of commands"
-    while (true)
+    while (!@done)
       do_turn
     end
+  end
+  
+  def victory
+    print_state
+    puts "Congratulations, you've won!"
+    @done=true
   end
   
   def print_commands
@@ -79,11 +86,11 @@ module Adventure
       else
         "You don't have #{command[1]}!"
       end
-    when 'exit' then exit
-    when 'help' then print_commands
+    when 'exit' then @done=true; ""
+    when 'help' then print_commands; ""
     else 'I have no idea what your talking about'
     end
-    
+    victory if World.room.victory
   end
   
   def get_command()

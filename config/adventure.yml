@@ -55,6 +55,62 @@ rooms:
         to: fountain
   - name: entryway
     description: As you enter the once lavish but now crumbling entryway, you hear the front door slam.  Heart thumping, you scrabble for the handle, but encounter only smooth wall.  Slowly regaining your senses, you close your eyes trying to calm the pounding behind your temples.  It looks like theres no turning back, but then there never was.
+    doors:
+      up:
+        description: Ahead of you there appears to be a rather rickety, yet grand, staircase.
+        to: stairway
+        locked: It appears to be ON FIRE!!!
+      west: kitchen
+      east: den
+  - name: kitchen
+    description: You enter a rather ancient looking kitchen.  While the layers upon layers of dust hint at a long period of neglect, yet there is evidence of recent use.
+    doors:
+      north: laundry
+      east: entryway
+  - name: laundry
+    description: You find an oldstyle laundry room, complete with washbasin and clothesline.
+    doors:
+      south: kitchen
+  - name: den
+    description: As you walk through what used to be a rather luxurious den, little puffs of dust rise with each step on the plush carpet.  The moths have long since eaten away the sofa covering, and in fact much of the sofa itself.  Several paintings adorn the wall, but the grime of age is far to thick to make them out.
+    doors:
+      west: entryway
+      north: library
+  - name: library
+    description: This rather dilapidated library give you the willies, almost more than any other room in the house.  Faceless statues peer out from every corner, giving you the impression of being watched by unseen eyes. The shelves were clearly once lined with books, but only a few covers and pages are even reconizable as such in the overall decay.
+    doors:
+      south: den
+  - name: stairway
+    description: You find yourself on a massive curving stairway, lined picture frames you can only assume once held actual paintings.
+    doors:
+      up:
+        description: Above you is an upstairs hallway
+        to: upstairs
+      down:
+        description: At the bottom of the stairs lies the entryway
+        to: entryway
+  - name: upstairs
+    description: As you step into the hallway your heart stops as you hear a loud creak.  Slowly you realize that it was just a loose floorboard.  You suddenly feel very lightheaded.
+    doors:
+      north:
+        to: office
+        locked: There appears to be a very angry looking Pit Bull in front of it.
+      west: bedroom
+      east: nursery
+      down:
+        description: Below you is the staircase you came up
+        to: stairway
+  - name: bedroom
+    description: A large and intimidating bed dominates the room.  A thick canopy obscures whatever might be inside, and you cannot bring yourself to look.
+    doors:
+      east: upstairs
+  - name: nursery
+    description: You find yourself in what appears to have been a nursery.  It is perhaphs the most worn dorn and oppressing room in the house, but the part the really haunts your mind is the ancienct wooden crib in the center of the room, complete with mobile, old holely blankets neatly laid out as though in preporation for an occupant.
+    doors:
+      west: upstairs
+  - name: office
+    description: You enter the office, and approach the aged mahogany desk at it's center.  The closer you get the more effort each step seems to take.  With trembling hands you open the top left drawer, and carefully lift out an object wrapped in a black cloth.  You slump into the chair and try to calm your jingling nerves.  It's here... it's all going to be okay.
+    victory: true
 items:
   - name: pebble
     description: There is a shiny pebble sitting beside the driveway.  As hard as you might try, your eyes are continually drawn to it.  Birdbrain.
@@ -73,3 +129,20 @@ items:
     unlocks:
       room: upper driveway
       door: north
+  - name: extinguisher
+    description: You see and old canister fire extinguisher laying nearby. Hope it still works!
+    used: Sure enough, the extinguisher did the job.  If it was the chemical or the copious amounts of dust it sprayed may forever be a mystery.
+    room: laundry
+    unlocks:
+      room: entryway
+      door: up
+  - name: meat
+    description: An unidentified meat is in a lump nearby.
+    room: kitchen
+    used:  You toss some of the meat to the dog, and it scarfs it down, distracted.  Then it fades out right before your eyes.  Huh, some programmer must be trying to save memory.
+    unlocks:
+      room: upstairs
+      door: north
+  - name: poetry
+    description: "You see one lone surviving book amongst the ruin.  On the cover you can barely make out the title: Vogon Poetry"
+    room: library

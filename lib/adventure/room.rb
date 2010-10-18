@@ -4,7 +4,7 @@ module Adventure
   module World
 
     class Room
-      attr_accessor :name, :description
+      attr_accessor :name, :description, :victory
       attr_accessor :items
 
       def initialize(attrs)
